@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+  <title>Hospital</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="dist/css/dataTables.bootstrap.css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/offcanvas.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+      <![endif]-->
+
+    </head>
+
+    <body>
+
+
+
+      <div class="col-xs-4 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="well sidebar-nav">
+          <ul class="nav">
+            <li class="active"><a data-toggle="modal" href="#hospitalDetails">New Hospital</a></li>
+            <li><a href="#">New Chennal Center</a></li>
+            <li><a href="#">New Despencary</a></li>
+            <li><a href="#doctors" data-toggle="tab">Doctiors</a></li>
+          </ul>
+        </div><!--/.well -->
+      </div><!--/span-->
+
+      <div>
+        <div class="col-xs-8 col-sm-10">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div >
+
+
+           <ul class="nav nav-tabs" id="profileSettingTabs">
+            <li><a href="#hospitalData" data-toggle="tab">Hospital Name</a></li>
+            <li><a href="#doctors" data-toggle="tab">Doctors</a></li>
+            <li><a href="#advance" data-toggle="tab">Advance</a></li>
+          </ul>
+
+          <div class="tab-content">
+
+            <div class="tab-pane" id="hospitalData">
+
+             <div class="form-group">
+
+              <legend>New Hospital</legend>
+              Hospital Info
+            </div>
+
+          </div>
+
+          <div class="tab-pane" id="doctors">
+            <br/>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDocModal">New Doctor</button>
+            <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="docListTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Doc Name</th>
+                  <th>Specialised</th>
+                  <th>Oparation</th>
+                   <th>Availability</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Dr. Perera</td>
+                  <td>schoy</td>
+                  <td>
+                     <button type="button" class="btn btn-primary">Edit</button>
+                     <button type="button" class="btn btn-danger">Delete</button>
+                  </td>
+                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane" id="advance">
+            Advance
+          </div>
+
+        </div>
+        <!-- Form Name -->
+
+
+
+
+        <!-- Text input-->
+
+
+      </div>
+    </div><!--/span-->
+
+  </div><!--/row-->
+
+  <hr>
+
+  <footer>
+    <p>&copy; Company 2013</p>
+  </footer>
+
+
+  <!-- Profile setting Modal -->
+  <div class="modal fade" id="hospitalDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Hospital Details</h4>
+        </div>
+
+
+
+        <div >
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="userName" class="col-lg-3 control-label">Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" id="userName" placeholder="Hospital Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="firstName" class="col-lg-3 control-label">Province</label>
+              <div class="col-lg-8">
+               <select class="form-control">
+                <option>Mustard</option>
+                <option>Ketchup</option>
+                <option>Relish</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName" class="col-lg-3 control-label">District</label>
+            <div class="col-lg-8">
+              <select class="form-control">
+                <option>Mustard</option>
+                <option>Ketchup</option>
+                <option>Relish</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="userEmail" class="col-lg-3 control-label">City</label>
+            <div class="col-lg-8">
+              <select class="form-control" id="userEmail" placeholder="City">
+                <option>Mustard</option>
+                <option>Ketchup</option>
+                <option>Relish</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+            <div class="col-lg-8">
+              <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription hospital"></textarea>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="inputLogType" class="col-lg-3 control-label">Image</label>
+            <div class="col-lg-8">
+              <div class="btn-group" >
+               <img src="images/pro-pic" alt="..." class="img-rounded">
+
+               <label class="col-lg-2 control-label"  for="exampleInputFile">Upload Image</label>
+               <div class="col-lg-8">
+                <input type="file" class="form-control"  id="exampleInputFile">
+
+                <p class="help-block">Example block-level help text here.</p>
+              </div>
+            </div>          
+          </div>            
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Add new doctor modal -->
+<div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add new Doctor</h4>
+      </div>
+      <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="specialisation" class="col-lg-3 control-label">Specialisation</label>
+              <div class="col-lg-8">
+                <select class="form-control"  id="specialisation" placeholder="Specialisation">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                  </select>
+            </div>
+          </div>
+            <div class="form-group">
+              <label for="firstName" class="col-lg-3 control-label">First Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" data-provide="typeahead" id="firstName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName" class="col-lg-3 control-label">Last Name</label>
+              <div class="col-lg-8">
+                 <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+              </div>
+            </div>  
+             <div class="form-group">
+              <label for="tp" class="col-lg-3 control-label">T.P.</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control bfh-phone" data-format="+1 (ddd) ddd-dddd">
+              </div>
+            </div>
+             <div class="form-group">
+              <label for="email" class="col-lg-3 control-label">E-Mail</label>
+              <div class="col-lg-8">
+                 <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="dob" class="col-lg-3 control-label">Dath Of Birth</label>
+            <div class="col-lg-8">
+               <input type="date" class="form-control" id="email" placeholder="dob">
+              </div>
+          </div>
+         
+          <div class="form-group">
+            <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+            <div class="col-lg-8">
+              <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription Doctor"></textarea>
+            </div>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Doc available time set Modal-->
+<div class="modal fade" id="docAvailbleTime" tabindex="-1" role="dialog" aria-labelledby="docAvailbleTime" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Doctor Availability</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-4">
+       <label for="fromDate" class="col-lg-3 control-label">From</label>
+            <div class="col-lg-8">
+               <input type="date" class="form-control" id="fromDate" placeholder="dob">
+              </div>
+       </div>
+       <div class="col-md-4">
+         <label for="toDate" class="col-lg-3 control-label">To</label>
+            <div class="col-lg-8">
+               <input type="date" class="form-control" id="toDate" placeholder="dob">
+              </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
+    <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
+    <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
+    <script src="offcanvas.js"></script>
+
+     <script type="text/javascript">
+            $(document).ready(function() {
+                $('#docListTable').dataTable( {
+                    "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                    "sPaginationType": "bootstrap"
+                } );
+            } );
+        </script>
+  </body>
+  </html>
