@@ -7,15 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
-  <script src="assets/js/jquery.js"></script>
    
-    <title>Channel Me</title>
+    <title>Blood Inventry system</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="dist/css/dataTables.bootstrap.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,14 +27,13 @@
   <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
+              <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Channel Me</a>
+          <a class="navbar-brand" href="#">Blood Bank</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -63,23 +62,87 @@
 
     <div class="container">
 
-      <div class="starter-template">
-        <h1>Collect you knoloage</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+       <div class="container" id="about">
+        <br/>
+        <br/>
+      <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Warning!</strong>  You are out of stoke in O-, 0 -<a href="#" class="alert-link"> Search other hospitals</a>
+    </div>
+
+      <div class="col-md-2">
+         
+        <div class="well sidebar-nav">
+          <ul class="nav">
+            <li> <a data-toggle="modal" href="#addBloodStockModal">New stock(+)</a></li>
+            <li><a href="#">Get stock(-)</a></li>
+            <li><a href="#">Seach stock</a></li>
+            <li><a href="#doctors" data-toggle="tab">Doctiors</a></li>
+          </ul>
+        </div><!--/.well -->
+       
+       
       </div>
 
-    </div><!-- /.container -->
+       <div class="col-md-10">
+   
+         <ul class="nav nav-tabs" id="userHomeTabs">
+            <li  class="active"><a  href="#bloodStockDev" data-toggle="tab">My Avaliblility</a></li>
+            <li><a href="#searchDev" data-toggle="tab">Search</a></li>
+          </ul>
 
+          <div class="tab-content">
+         <div class="tab-pane active" id="bloodStockDev">
+            <br/>
 
-  <div class="container" id="about">
+            <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="docListTable">
+              <thead>
+                <tr>
+                  <th>Group</th>
+                  <th>Posible Recipient</th>
+                  <th>Available Stock</th>
+                  <th>Least Exp Date</th>
+                  <th>More</th>
+                   <th>(-)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>O−</td>
+                  <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
+                   <td>1000 pints</td>
+                  <td>12/11/2016</td>
+                  
+                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+                </tr>
+                <tr>
+                  <td>O+</td>
+                  <td>O+,A+,B-,B+,AB+</td>
+                   <td>100 pints</td>
+                  <td>12/11/2015</td>
+                  
+                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-      <div class="starter-template">
-        <h1>About Tag-Hub</h1>
-        <p class="lead">Tag hubl.............</p>
+          <!--Search Dev -->
+          <div class="tab-pane" id="searchDev">
+          </div>
+
+        </div>
       </div>
 
     </div>
 
+
+    </div><!-- /.container -->
+
+
+ 
   <!-- Sign in Modal -->
   <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -213,10 +276,79 @@
   </div><!-- /.modal -->
 
 
+<!-- Add new blood stock modal -->
+<div class="modal fade" id="addBloodStockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add Blood stock</h4>
+      </div>
+      <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="bloodGroup" class="col-lg-3 control-label">Blood Group</label>
+              <div class="col-lg-8">
+                <select class="form-control"  id="bloodGroup" >
+                    <option>O-</option>
+                    <option>O+</option>
+                    <option>A-</option>
+                    <option>A+</option>
+                    <option>B-</option>
+                    <option>B+</option>
+                    <option>AB-</option>
+                    <option>AB+</option>
+                  </select>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="quantity" class="col-lg-3 control-label">Quantity</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" data-provide="typeahead" id="quantity">
+              </div>
+            </div>
+          <div class="form-group">
+            <label for="expdate" class="col-lg-3 control-label">Exp Date</label>
+            <div class="col-lg-8">
+               <input type="date" class="form-control" id="expdate" placeholder="Exp date">
+              </div>
+          </div>
+         
+          <div class="form-group">
+            <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+            <div class="col-lg-8">
+              <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription Doctor"></textarea>
+            </div>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.js"></script>
    <script src="dist/js/bootstrap.min.js"></script>
+
+     <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
+    <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
+    <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
+    <script src="offcanvas.js"></script>
+
+     <script type="text/javascript">
+            $(document).ready(function() {
+                $('#docListTable').dataTable( {
+                    "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                    "sPaginationType": "bootstrap"
+                } );
+            } );
+        </script>
   </body>
 </html>
