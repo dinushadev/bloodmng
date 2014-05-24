@@ -1,33 +1,33 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-   
-    <title>Blood Inventry system</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-    <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.css" rel="stylesheet">
+  <title>Blood Inventry system</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/starter-template.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="dist/css/dataTables.bootstrap.css">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
       <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
+      <![endif]-->
+    </head>
 
-  <body>
+    <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-              <div class="navbar-header">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -41,18 +41,18 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-            <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
             <li><a data-toggle="modal" href="#signInModal">Sign Out</a></li>
 
-             <li class="dropdown">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img width="30px" height="30px" src="images/pro-pic" alt="Dinusha" ><b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a data-toggle="modal"  href="#profileSettingsModal">Settings</a></li>
                 <li><a href="#">Sign out</a></li>
-               <li class="divider"></li>
+                <li class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Something else here</a></li>
-               
+                <li><a href="#">Something else here</a></li>
+
               </ul>
             </li>
           </ul>
@@ -62,218 +62,342 @@
 
     <div class="container">
 
-       <div class="container" id="about">
-        <br/>
-        <br/>
+     <div class="container" id="about">
+      <br/>
+      <br/>
       <div class="alert alert-warning alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>Warning!</strong>  You are out of stoke in O-, 0 -<a href="#" class="alert-link"> Search other hospitals</a>
-    </div>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Warning!</strong>  You are out of stoke in O-, 0 -<a href="#" class="alert-link"> Search other hospitals</a>
+      </div>
 
       <div class="col-md-2">
-         
+
         <div class="well sidebar-nav">
           <ul class="nav">
             <li> <a data-toggle="modal" href="#addBloodStockModal">New stock(+)</a></li>
             <li><a href="#">Get stock(-)</a></li>
             <li><a href="#">Seach stock</a></li>
-            <li><a href="#doctors" data-toggle="tab">Doctiors</a></li>
+            <li><a href="#hospitals" data-toggle="tab">Hospitals</a></li>
           </ul>
         </div><!--/.well -->
-       
-       
+
+
       </div>
 
-       <div class="col-md-10">
-   
-         <ul class="nav nav-tabs" id="userHomeTabs">
-            <li  class="active"><a  href="#bloodStockDev" data-toggle="tab">My Avaliblility</a></li>
-            <li><a href="#searchDev" data-toggle="tab">Search</a></li>
-          </ul>
+      <div class="col-md-10">
 
-          <div class="tab-content">
-         <div class="tab-pane active" id="bloodStockDev">
-            <br/>
+       <ul class="nav nav-tabs" id="userHomeTabs">
+        <li  class="active"><a  href="#bloodStocktabDev" data-toggle="tab">My Avaliblility</a></li>
+        <li><a href="#searchtabdiv" data-toggle="tab">Search</a></li>
+        <li><a href="#hospitaltabdiv" data-toggle="tab">Hospitals</a></li>
+      </ul>
 
-            <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="docListTable">
-              <thead>
-                <tr>
-                  <th>Group</th>
-                  <th>Posible Recipient</th>
-                  <th>Available Stock</th>
-                  <th>Least Exp Date</th>
-                  <th>More</th>
-                   <th>(-)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>O−</td>
-                  <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
-                   <td>1000 pints</td>
-                  <td>12/11/2016</td>
-                  
-                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-                </tr>
-                <tr>
-                  <td>O+</td>
-                  <td>O+,A+,B-,B+,AB+</td>
-                   <td>100 pints</td>
-                  <td>12/11/2015</td>
-                  
-                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-                  <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <div class="tab-content">
+       <div class="tab-pane active" id="bloodStocktabDev">
+        <br/>
 
-          <!--Search Dev -->
-          <div class="tab-pane" id="searchDev">
-          </div>
+        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="docListTable">
+          <thead>
+            <tr>
+              <th>Group</th>
+              <th>Posible Recipient</th>
+              <th>Available Stock</th>
+              <th>Least Exp Date</th>
+              <th>More</th>
+              <th>(-)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>O−</td>
+              <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
+              <td>1000 pints</td>
+              <td>12/11/2016</td>
 
-        </div>
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+            </tr>
+            <tr>
+              <td>O+</td>
+              <td>O+,A+,B-,B+,AB+</td>
+              <td>100 pints</td>
+              <td>12/11/2015</td>
+
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-    </div>
+      <!--Search tab Dev -->
+      <div class="tab-pane" id="searchtabdiv">
+      </div>
+
+      <!--Hospital tab Dev -->
+      <div class="tab-pane" id="hospitaltabdiv">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospitalDetails">New Hospital</button>
+        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="hospitalListTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Availablity</th>
+              <th>Least Exp Date</th>
+              <th>More</th>
+              <th>(-)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Genaral Hospital</td>
+              <td>Colombo 11</td>
+              <td>A-,A-</td>
+              <td>12/11/2016</td>
+
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+            </tr>
+            <tr>
+              <td>Hemas Hospital</td>
+               <td>Waththala</td>
+              <td>O+,A+,B-,B+,AB+</td>
+              <td>12/11/2015</td>
+
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+        
+
+  </div>
+
+</div>
+</div>
+
+</div>
 
 
-    </div><!-- /.container -->
 
 
- 
-  <!-- Sign in Modal -->
-  <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Sign-In</h4>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-         
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+<!-- Sign in Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Sign-In</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
-  
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-   <!-- Profile setting Modal -->
-  <div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Profile settings</h4>
-        </div>
-        <div class="modal-body">
-         
-            <ul class="nav nav-tabs" id="profileSettingTabs">
-              <li><a href="#general"  data-toggle="tab">General</a></li>
-              <li><a href="#picture" data-toggle="tab">Picture</a></li>
-              <li><a href="#network" data-toggle="tab">Network</a></li>
-              <li><a href="#advance" data-toggle="tab">Advance</a></li>
-            </ul>
-
-        </div>
-
-
-        <div class="tab-content">
-        <!-- General Tab -->
-          <div class="tab-pane active" id="general"><h2>Dinusha Nandika</h2>
-            <form class="form-horizontal" role="form">
-              <div class="form-group">
-                <label for="userName" class="col-lg-3 control-label">User Name</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" id="userName" placeholder="User Name">
-                </div>
+<!-- Hosptial details modal -->
+<div class="modal fade" id="hospitalDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Hospital Details</h4>
               </div>
-             <div class="form-group">
-                <label for="firstName" class="col-lg-3 control-label">First Name</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" id="firstName" placeholder="First Name">
+
+
+
+              <div >
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label for="userName" class="col-lg-3 control-label">Name</label>
+                    <div class="col-lg-8">
+                      <input type="text" class="form-control" id="userName" placeholder="Hospital Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstName" class="col-lg-3 control-label">Province</label>
+                    <div class="col-lg-8">
+                     <select class="form-control">
+                      <option>Mustard</option>
+                      <option>Ketchup</option>
+                      <option>Relish</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
                 <div class="form-group">
-                <label for="lastName" class="col-lg-3 control-label">Last Name</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                  <label for="lastName" class="col-lg-3 control-label">District</label>
+                  <div class="col-lg-8">
+                    <select class="form-control">
+                      <option>Mustard</option>
+                      <option>Ketchup</option>
+                      <option>Relish</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="userEmail" class="col-lg-3 control-label">Email</label>
-                <div class="col-lg-8">
-                  <input type="email" class="form-control" id="userEmail" placeholder="Email">
+                <div class="form-group">
+                  <label for="userEmail" class="col-lg-3 control-label">City</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" id="userEmail" placeholder="City">
+                      <option>Mustard</option>
+                      <option>Ketchup</option>
+                      <option>Relish</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-             <div class="form-group">
-                <label for="birthDay" class="col-lg-3 control-label">Birth Day</label>
-                <div class="col-lg-8">
-                  <input type="date" class="form-control" id="birthDay" placeholder="Birth Day">
+                <div class="form-group">
+                  <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+                  <div class="col-lg-8">
+                    <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription hospital"></textarea>
+                  </div>
                 </div>
+
+
+
+                <div class="form-group">
+                  <label for="inputLogType" class="col-lg-3 control-label">Image</label>
+                  <div class="col-lg-8">
+                    <div class="btn-group" >
+                     <img src="images/pro-pic" alt="..." class="img-rounded">
+
+                     <label class="col-lg-2 control-label"  for="exampleInputFile">Upload Image</label>
+                     <div class="col-lg-8">
+                      <input type="file" class="form-control"  id="exampleInputFile">
+
+                      <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                  </div>          
+                </div>            
               </div>
 
-           
-           
+            </form>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<!-- Profile setting Modal -->
+<div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Profile settings</h4>
+      </div>
+      <div class="modal-body">
+
+        <ul class="nav nav-tabs" id="profileSettingTabs">
+          <li><a href="#general"  data-toggle="tab">General</a></li>
+          <li><a href="#picture" data-toggle="tab">Picture</a></li>
+          <li><a href="#network" data-toggle="tab">Network</a></li>
+          <li><a href="#advance" data-toggle="tab">Advance</a></li>
+        </ul>
+
+      </div>
+
+
+      <div class="tab-content">
+        <!-- General Tab -->
+        <div class="tab-pane active" id="general"><h2>Dinusha Nandika</h2>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="userName" class="col-lg-3 control-label">User Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" id="userName" placeholder="User Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="firstName" class="col-lg-3 control-label">First Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName" class="col-lg-3 control-label">Last Name</label>
+              <div class="col-lg-8">
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userEmail" class="col-lg-3 control-label">Email</label>
+              <div class="col-lg-8">
+                <input type="email" class="form-control" id="userEmail" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="birthDay" class="col-lg-3 control-label">Birth Day</label>
+              <div class="col-lg-8">
+                <input type="date" class="form-control" id="birthDay" placeholder="Birth Day">
+              </div>
+            </div>
+
+
+
             <div class="form-group">
               <label for="inputLogType" class="col-lg-3 control-label">Gender</label>
               <div class="col-lg-8">
                 <div class="btn-group" >
                   <label class="radio">
-                     <input type="radio" name="genderRb" id="genderM" value="M" >
-                            Male
-                     </label>
-                  <label class="radio">
-                     <input type="radio" name="genderRb" id="genderF" value="F" >
-                            Female
-                    </label>
-                </div>          
-              </div>            
-             </div>
-             
-            </form>
+                   <input type="radio" name="genderRb" id="genderM" value="M" >
+                   Male
+                 </label>
+                 <label class="radio">
+                   <input type="radio" name="genderRb" id="genderF" value="F" >
+                   Female
+                 </label>
+               </div>          
+             </div>            
+           </div>
 
+         </form>
+
+       </div>
+       <div class="tab-pane" id="picture">
+
+
+        <form class="form-horizontal" role="form">
+
+         <div class="form-group">
+          <img src="images/pro-pic" alt="..." class="img-rounded">
+
+          <label class="col-lg-2 control-label"  for="exampleInputFile">Upload Image</label>
+          <div class="col-lg-8">
+            <input type="file" class="form-control"  id="exampleInputFile">
+
+            <p class="help-block">Example block-level help text here.</p>
           </div>
-          <div class="tab-pane" id="picture">
-         
-
-              <form class="form-horizontal" role="form">
-           
-               <div class="form-group">
-                <img src="images/pro-pic" alt="..." class="img-rounded">
-           
-                  <label class="col-lg-2 control-label"  for="exampleInputFile">Upload Image</label>
-                    <div class="col-lg-8">
-                      <input type="file" class="form-control"  id="exampleInputFile">
-
-                     <p class="help-block">Example block-level help text here.</p>
-                     </div>
-                </div>
-
-             </form>
-          </div>
-          <div class="tab-pane" id="network">Network</div>
-          <div class="tab-pane" id="advance">Advance</div>
         </div>
-        <script>
-          $(function () {
-            $('#profileSettingTabs a[href="#general"]').tab('show')
-          })
-        </script>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+      </form>
+    </div>
+    <div class="tab-pane" id="network">Network</div>
+    <div class="tab-pane" id="advance">Advance</div>
+  </div>
+  <script>
+  $(function () {
+    $('#profileSettingTabs a[href="#general"]').tab('show')
+  })
+  </script>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary">Save</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <!-- Add new blood stock modal -->
@@ -285,70 +409,75 @@
         <h4 class="modal-title" id="myModalLabel">Add Blood stock</h4>
       </div>
       <div class="modal-body">
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="bloodGroup" class="col-lg-3 control-label">Blood Group</label>
-              <div class="col-lg-8">
-                <select class="form-control"  id="bloodGroup" >
-                    <option>O-</option>
-                    <option>O+</option>
-                    <option>A-</option>
-                    <option>A+</option>
-                    <option>B-</option>
-                    <option>B+</option>
-                    <option>AB-</option>
-                    <option>AB+</option>
-                  </select>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="bloodGroup" class="col-lg-3 control-label">Blood Group</label>
+            <div class="col-lg-8">
+              <select class="form-control"  id="bloodGroup" >
+                <option>O-</option>
+                <option>O+</option>
+                <option>A-</option>
+                <option>A+</option>
+                <option>B-</option>
+                <option>B+</option>
+                <option>AB-</option>
+                <option>AB+</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-              <label for="quantity" class="col-lg-3 control-label">Quantity</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" data-provide="typeahead" id="quantity">
-              </div>
+            <label for="quantity" class="col-lg-3 control-label">Quantity</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" data-provide="typeahead" id="quantity">
             </div>
+          </div>
           <div class="form-group">
             <label for="expdate" class="col-lg-3 control-label">Exp Date</label>
             <div class="col-lg-8">
-               <input type="date" class="form-control" id="expdate" placeholder="Exp date">
-              </div>
-          </div>
+             <input type="date" class="form-control" id="expdate" placeholder="Exp date">
+           </div>
+         </div>
          
-          <div class="form-group">
-            <label for="birthDay" class="col-lg-3 control-label">Discription</label>
-            <div class="col-lg-8">
-              <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription Doctor"></textarea>
-            </div>
+         <div class="form-group">
+          <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+          <div class="col-lg-8">
+            <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription Doctor"></textarea>
           </div>
+        </div>
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add</button>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Add</button>
     </div>
   </div>
+</div>
 </div>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery.js"></script>
-   <script src="dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
 
-     <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
+    <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
     <script src="offcanvas.js"></script>
 
-     <script type="text/javascript">
-            $(document).ready(function() {
-                $('#docListTable').dataTable( {
-                    "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
-                    "sPaginationType": "bootstrap"
-                } );
-            } );
-        </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#docListTable').dataTable( {
+        "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+        "sPaginationType": "bootstrap"
+      } );
+
+         $('#hospitalListTable').dataTable( {
+        "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+        "sPaginationType": "bootstrap"
+      } );
+    } );
+    </script>
   </body>
-</html>
+  </html>
