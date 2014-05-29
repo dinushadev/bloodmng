@@ -1,0 +1,26 @@
+{
+  "name": "blood_repo",
+  "version": "0.0.0",
+  "description": "Blood stock managment system",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dnsw83/bloodmng.git"
+  },
+  "author": "Dinusha.dns",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnsw83/bloodmng/issues"
+  },
+  "dependencies": {
+     "express": "~3.4.4",
+    "process": "~0.5.1",
+    "request": "~2.27.0",
+    "ejs":"*",
+    "url":"*"
+  },
+  "homepage": "https://github.com/dnsw83/bloodmng"
+}
