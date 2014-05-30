@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "description": "Blood stock managment system",
   "main": "app.js",
-  "scripts": {
-    "test": "test"
-  },
+ 
   "repository": {
     "type": "git",
     "url": "git://github.com/dnsw83/bloodmng.git"
