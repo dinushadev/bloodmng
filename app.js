@@ -51,6 +51,12 @@ app.get('/login',  function login(request, response) {
 	response.render('index.html');
 });
 
+app.get('/home',  function login(request, response) {
+
+	response.render('home.html');
+});
+
+
 /*exports.login = function login(request, response) {
 
 response.render('index.html', {
