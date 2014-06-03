@@ -7,6 +7,7 @@ process = require('process'),
 env = process.env.NODE_ENV || 'dev',
 config = require('./config')[env],
 path = require('path'),
+pg = require("pg"),
 request = require('request');
 
 
@@ -28,6 +29,24 @@ app.engine('html', ejs.renderFile);
 * Render the login page.
 */
 app.get('/',  function login(request, response) {
+
+	response.render('index.html');
+});
+
+app.get('/login',  function login(request, response) {
+
+	console.log('ddd'+config.dburl);	
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+  var query = client.query('SELECT * FROM users;');
+
+  query.on('row', function(row) {
+    console.log(JSON.stringify(row));
+  });
+});
 
 	response.render('index.html');
 });

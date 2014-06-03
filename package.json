@@ -18,7 +18,8 @@
     "process": "~0.5.1",
     "request": "~2.27.0",
     "ejs":"*",
-    "url":"*"
+    "url":"*",
+    "pg": "0.6.15"
   },
   "homepage": "https://github.com/dnsw83/bloodmng"
 }
