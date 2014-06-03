@@ -132,6 +132,73 @@
 
       <!--Search tab Dev -->
       <div class="tab-pane" id="searchtabdiv">
+           <form class="form-vertical" role="form">
+          <div class="form-group">
+             <div class="col-lg-4">
+              <select class="form-control"  id="bloodGroup" >
+                <option>[select a blood group]</option>
+                <option>O-</option>
+                <option>O+</option>
+                <option>A-</option>
+                <option>A+</option>
+                <option>B-</option>
+                <option>B+</option>
+                <option>AB-</option>
+                <option>AB+</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+               <input type="text" class="form-control" id="neededQuantity" placeholder="Needed Quantity">
+      
+            </div>
+             
+          <button type="button" class="col-lg-4 btn btn-primary">Search</button>
+           
+          </div>
+        </form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <!-- Search result div table-->
+        <div>
+          <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="searchResultTable">
+          <thead>
+            <tr>
+              <th>Hospital</th>
+              <th>Location</th>
+              <th>Posible Recipient</th>
+              <th>Available Stock</th>
+              <th>Least Exp Date</th>
+              <th>Request</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ragama Genaral Hos−</td>
+               <td>Ragam</td>
+              <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
+              <td>1000 pints</td>
+              <td>12/11/2016</td>
+
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Request</button></td>
+             
+            </tr>
+            <tr>
+              <td>Asiri Hospital</td>
+                 <td>Colombo 6</td>
+              <td>O+,A+,B-,B+,AB+</td>
+              <td>100 pints</td>
+              <td>12/11/2015</td>
+
+              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Request</button></td>
+             
+            </tr>
+          </tbody>
+        </table>
+
+        </div>
+
       </div>
 
       <!--Hospital tab Dev -->
@@ -439,9 +506,9 @@
          </div>
          
          <div class="form-group">
-          <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+          <label for="birthDay" class="col-lg-3 control-label">Remark</label>
           <div class="col-lg-8">
-            <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription Doctor"></textarea>
+            <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter Remark"></textarea>
           </div>
         </div>
       </form>
