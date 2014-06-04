@@ -6,6 +6,6 @@ module.exports = {
 
    /* dev: {
 		dburl: 'postgres://dbuser1:dbuser@localhost:5432/bloodmg'
-		*/
-    }
+		
+    }*/
 }
