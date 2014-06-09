@@ -106,9 +106,14 @@ app.get('/home',  function home(request, response) {
 app.post('/hospital',  function home(request, response) {
 
 	console.log('row:'+JSON.stringify(request.body));
-	response.render('home.html');
+	response.send('OK');
 });
 
+app.get('/hospital',  function home(request, response) {
+
+	console.log('row:'+JSON.stringify(request.body));
+	response.render('home.html');
+});
 /*exports.login = function login(request, response) {
 
 response.render('index.html', {
