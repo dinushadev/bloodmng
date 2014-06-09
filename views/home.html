@@ -281,17 +281,17 @@
 
 
               <div >
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="hospitalMatnForm" >
                   <div class="form-group">
-                    <label for="userName" class="col-lg-3 control-label">Name</label>
+                    <label for="hname" class="col-lg-3 control-label">Name</label>
                     <div class="col-lg-8">
-                      <input type="text" class="form-control" id="userName" placeholder="Hospital Name">
+                      <input type="text" class="form-control" id="hname" name="hname" placeholder="Hospital Name">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="firstName" class="col-lg-3 control-label">Province</label>
+                    <label for="hprovince" class="col-lg-3 control-label">Province</label>
                     <div class="col-lg-8">
-                     <select class="form-control">
+                     <select class="form-control" name="hprovince" id="hprovince">
                       <option>Mustard</option>
                       <option>Ketchup</option>
                       <option>Relish</option>
@@ -299,9 +299,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="lastName" class="col-lg-3 control-label">District</label>
+                  <label for="hdist" class="col-lg-3 control-label">District</label>
                   <div class="col-lg-8">
-                    <select class="form-control">
+                    <select id="hdist" name="hdist" class="form-control">
                       <option>Mustard</option>
                       <option>Ketchup</option>
                       <option>Relish</option>
@@ -309,9 +309,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="userEmail" class="col-lg-3 control-label">City</label>
+                  <label for="hcity" class="col-lg-3 control-label">City</label>
                   <div class="col-lg-8">
-                    <select class="form-control" id="userEmail" placeholder="City">
+                    <select class="form-control" id="hcity" name="hcity" placeholder="City">
                       <option>Mustard</option>
                       <option>Ketchup</option>
                       <option>Relish</option>
@@ -319,9 +319,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="birthDay" class="col-lg-3 control-label">Discription</label>
+                  <label for="hdesc" class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-8">
-                    <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter a short discription hospital"></textarea>
+                    <textarea class="form-control"  id="hdesc" name="hdesc"  rows="6" placeholder="Enter a short discription hospital"></textarea>
                   </div>
                 </div>
 
@@ -343,14 +343,15 @@
                 </div>            
               </div>
 
-            </form>
 
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-primary" onClick="addHospital()">Save</button>
           </div>
+
+            </form>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -452,11 +453,7 @@
     <div class="tab-pane" id="network">Network</div>
     <div class="tab-pane" id="advance">Advance</div>
   </div>
-  <script>
-  $(function () {
-    $('#profileSettingTabs a[href="#general"]').tab('show')
-  })
-  </script>
+ 
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -532,7 +529,9 @@
     <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
     <script src="offcanvas.js"></script>
+        <script src="http://malsup.github.com/jquery.form.js"></script> 
 
+     <script src="js/home.js"></script>  
     <script type="text/javascript">
     $(document).ready(function() {
       $('#docListTable').dataTable( {
@@ -544,6 +543,10 @@
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "sPaginationType": "bootstrap"
       } );
+
+
+    $('#profileSettingTabs a[href="#general"]').tab('show');
+
     } );
     </script>
   </body>

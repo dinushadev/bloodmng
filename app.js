@@ -44,9 +44,32 @@ app.post('/login',  function login(request, response) {
 			console.log('Error in connect to db: '+err);
 		}
 		//var query = client.query("SELECT * FROM users WHERE uname=dinu");
-		     var query = client.query("SELECT uname,pass,email FROM users WHERE uname = $1", [usrname]);
+		var query = client.query("SELECT uname,pass,email,utype FROM users WHERE uname = $1", [usrname],function(err, result) {
+			if(err){
+				console.log('Erro in query: '+err);
+				response.redirect('/');
+				return;
+			}
 
-		query.on('row', function(row) {
+
+			console.log('row:'+JSON.stringify(result.rows));
+			if(result.rows[0]){
+				if(result.rows[0].pass == pass){
+					//TODO add session data
+					response.redirect('/home');
+					//return;
+				}else{
+					//invalid pass
+					response.redirect('/');
+				}
+			}else{
+				//invalid usrname
+				response.redirect('/');
+			}
+
+		});
+
+/*		query.on('row', function(row) {
 			console.log('row:'+JSON.stringify(row));
 			if(row){
 				if(row.pass == pass){
@@ -62,9 +85,16 @@ app.post('/login',  function login(request, response) {
 				response.redirect('/');
 			}
 		});
-	});
+		   query.on('error', function(error) {
+		   	console.log('errrooooooooooo'+error)
+          		})
+		query.on('oid', function(row) {
+			response.redirect('/');
+		});*/
 
-	
+});
+
+
 });
 
 app.get('/home',  function home(request, response) {
@@ -72,6 +102,12 @@ app.get('/home',  function home(request, response) {
 	response.render('home.html');
 });
 
+
+app.post('/hospital',  function home(request, response) {
+
+	console.log('row:'+JSON.stringify(request.body));
+	response.render('home.html');
+});
 
 /*exports.login = function login(request, response) {
 
