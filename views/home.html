@@ -68,8 +68,9 @@
       <div class="alert alert-warning alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Warning!</strong>  You are out of stoke in O-, 0 -<a href="#" class="alert-link"> Search other hospitals</a>
-      </div>
 
+      </div>
+      <div id = "home_alert_placeholder"></div>
       <div class="col-md-2">
 
         <div class="well sidebar-nav">
@@ -292,9 +293,13 @@
                     <label for="hprovince" class="col-lg-3 control-label">Province</label>
                     <div class="col-lg-8">
                      <select class="form-control" name="hprovince" id="hprovince">
-                      <option>Mustard</option>
-                      <option>Ketchup</option>
-                      <option>Relish</option>
+                      <option value="Western">Western</option>
+                      <option value="Southern">Southern</option>
+                      <option value="Sabaragamuwa"> Sabaragamuwa</option>
+                      <option value="Sabaragamuwa">Western</option>
+                      <option value="North Western"> North Western</option>
+                      <option value="Central">Central</option>
+                      <option value="Uva">Uva</option>
                     </select>
                   </div>
                 </div>
@@ -302,32 +307,33 @@
                   <label for="hdist" class="col-lg-3 control-label">District</label>
                   <div class="col-lg-8">
                     <select id="hdist" name="hdist" class="form-control">
-                      <option>Mustard</option>
-                      <option>Ketchup</option>
-                      <option>Relish</option>
+                      <option value="Colombo">Colombo</option>
+                      <option value="Gampaha">Gampaha</option>
+                      <option value="Kalutara">Kalutara</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="hcity" class="col-lg-3 control-label">City</label>
                   <div class="col-lg-8">
-                    <select class="form-control" id="hcity" name="hcity" placeholder="City">
+                   <!--  <select class="form-control" id="hcity" name="hcity" placeholder="City">
                       <option>Mustard</option>
                       <option>Ketchup</option>
                       <option>Relish</option>
-                    </select>
+                    </select> -->
+                    <input type="text" class="form-control" id="hcity" name="hcity" placeholder="City">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="hdesc" class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-8">
-                    <textarea class="form-control"  id="hdesc" name="hdesc"  rows="6" placeholder="Enter a short discription hospital"></textarea>
+                    <textarea class="form-control"  id="hdesc" name="hdesc"  rows="3" placeholder="Enter a short discription hospital"></textarea>
                   </div>
                 </div>
 
 
 
-                <div class="form-group">
+               <!--  <div class="form-group">
                   <label for="inputLogType" class="col-lg-3 control-label">Image</label>
                   <div class="col-lg-8">
                     <div class="btn-group" >
@@ -341,7 +347,7 @@
                     </div>
                   </div>          
                 </div>            
-              </div>
+              </div> -->
 
 
           </div>
@@ -528,9 +534,7 @@
     <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
-    <script src="offcanvas.js"></script>
-        <script src="http://malsup.github.com/jquery.form.js"></script> 
-
+   
      <script src="js/home.js"></script>  
     <script type="text/javascript">
     $(document).ready(function() {
@@ -546,6 +550,8 @@
 
 
     $('#profileSettingTabs a[href="#general"]').tab('show');
+
+    loadHospitals();
 
     } );
     </script>

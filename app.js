@@ -66,7 +66,7 @@ app.post('/login',  function login(request, response) {
 				//invalid usrname
 				response.redirect('/');
 			}
-
+			//done();
 		});
 
 /*		query.on('row', function(row) {
@@ -105,14 +105,73 @@ app.get('/home',  function home(request, response) {
 
 app.post('/hospital',  function home(request, response) {
 
-	console.log('row:'+JSON.stringify(request.body));
-	response.send('OK');
+	console.log('request:'+JSON.stringify(request.body));
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+
+		var sql = 'INSERT INTO hospital (hname,pov,dis,city,descr) VALUES($1,$2,$3,$4,$5)';
+		client.query(sql,[request.body.hname,request.body.hprovince,request.body.hdist,request.body.hcity,request.body.hdesc],function(err,result){
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			if(result.rowCount>0){
+				
+				response.statusCode=201;
+				response.send('New hospital succesfully added.');
+			}else{
+				
+				response.statusCode=200;
+				response.send('Sorry No record was added.');
+			}
+		});
+
+		
+	});
+
+	//response.send('OK');
 });
 
 app.get('/hospital',  function home(request, response) {
 
-	console.log('row:'+JSON.stringify(request.body));
-	response.render('home.html');
+	console.log('request id:'+request.body.hid);
+	var sql;
+	if(request.body.hid){
+		sql = 'SELECT hname,pov,dis,city FROM hospital WHERE=$1';
+	}else{
+		sql = 'SELECT hname,pov,dis,city FROM hospital ';
+	}
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+
+		var sql = 'SELECT hname,pov,dis,city FROM hospital ';
+		client.query(sql,function(err,result){
+			
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			response.send(result.rows);
+		//	done();
+		});
+
+		
+	});
+	
+	
 });
 /*exports.login = function login(request, response) {
 
