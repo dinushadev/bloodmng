@@ -153,8 +153,6 @@ app.get('/hospital',  function home(request, response) {
 			console.log('Error in connect to db: '+err);
 		}
 
-
-		var sql = 'SELECT hname,pov,dis,city FROM hospital ';
 		client.query(sql,function(err,result){
 			
 			if(err){
