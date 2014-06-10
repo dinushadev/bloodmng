@@ -143,9 +143,9 @@ app.get('/hospital',  function home(request, response) {
 	console.log('request id:'+request.body.hid);
 	var sql;
 	if(request.body.hid){
-		sql = 'SELECT hname,pov,dis,city FROM hospital WHERE=$1';
+		sql = 'SELECT hid,hname,pov,dis,city FROM hospital WHERE=$1';
 	}else{
-		sql = 'SELECT hname,pov,dis,city FROM hospital ';
+		sql = 'SELECT hid,hname,pov,dis,city FROM hospital ';
 	}
 
 	pg.connect(config.dburl, function(err, client) {
@@ -162,7 +162,19 @@ app.get('/hospital',  function home(request, response) {
 				return;
 			}
 
-			response.send(result.rows);
+			var hotTabData=[];
+		
+
+			result.rows.forEach(function(entry) {
+			    var tempRow= {'name':entry.hname,'loc':entry.pov+','+entry.dis,
+			    'avail':'','exp':'',
+			     'dtls':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button>',
+			     'del':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button>'};
+			    
+			     hotTabData.push(tempRow);
+			
+			});
+			response.send({"data": hotTabData});
 		//	done();
 		});
 

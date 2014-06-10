@@ -15,7 +15,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/starter-template.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="dist/css/dataTables.bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/jquery.dataTables.css">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -216,7 +216,7 @@
               <th>(-)</th>
             </tr>
           </thead>
-          <tbody>
+       <!--    <tbody>
             <tr>
               <td>Genaral Hospital</td>
               <td>Colombo 11</td>
@@ -235,7 +235,7 @@
               <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
               <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
 
       </div>
@@ -528,10 +528,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
+    <script src="dist/js/jquery.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="dist/js/jquery.dataTables.js"> </script>
+    <script type="text/javascript" src="dist/js/jquery.dataTables.min.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
    
@@ -545,13 +545,22 @@
 
          $('#hospitalListTable').dataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
-        "sPaginationType": "bootstrap"
+         "ajax": "/hospital",
+        "columns": [
+            { "data": "name" },
+            { "data": "loc" },
+             { "data": "avail" },
+            { "data": "exp" },
+            { "data": "dtls" },
+            { "data": "del" }
+        ]
+        
       } );
 
 
     $('#profileSettingTabs a[href="#general"]').tab('show');
 
-    loadHospitals();
+    //loadHospitals();
 
     } );
     </script>
