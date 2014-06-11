@@ -16,7 +16,10 @@
   <!-- Custom styles for this template -->
   <link href="css/starter-template.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="dist/css/jquery.dataTables.css">
-
+  <link rel="stylesheet"  href="dist/datepicker/css/datepicker.css">
+<style>
+.datepicker{z-index:1151;}
+</style>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -504,8 +507,14 @@
           <div class="form-group">
             <label for="expdate" class="col-lg-3 control-label">Exp Date</label>
             <div class="col-lg-8">
-             <input type="date" class="form-control" id="expdate" placeholder="Exp date">
-           </div>
+             <!--  <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+              <input class="span2" id="expdate" size="16" type="text" value="12-02-2012">
+              <span class="add-on"><i class="icon-th"></i></span>
+            </div> -->
+             <input type="text" class="form-control" data-date="12-02-2012" data-date-format="dd-mm-yyyy" id="expdate">
+             
+
+             </div>
          </div>
          
          <div class="form-group">
@@ -533,11 +542,19 @@
 
     <script type="text/javascript" src="dist/js/jquery.dataTables.min.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrap.js"> </script>
+    <script type="text/javascript" src="dist/datepicker/js/bootstrap-datepicker.js"> </script>
     <script type="text/javascript" src="dist/js/dataTables.bootstrapPagination.js"> </script>
+    <script >
+      $(function(){
+             $('#expdate').datepicker();
+
+      });
+    </script>
    
      <script src="js/home.js"></script>  
     <script type="text/javascript">
     $(document).ready(function() {
+   
       $('#docListTable').dataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
         "sPaginationType": "bootstrap"
