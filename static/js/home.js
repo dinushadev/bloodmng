@@ -8,6 +8,7 @@ function addHospital(){
            {
               // alert(data); // show response from the php script.
               home_alert(data,'succ');
+              hospitalListTable=.ajax.reload();
             $('#hospitalDetails').modal('toggle');
            },
            error: function(err)
@@ -89,7 +90,9 @@ function addBloodStock(){
            {
               // alert(JSON.stringify(data)); // show response from the php script.
               home_alert(data,'succ');
+               bloodStockTable.ajax.reload();
             $('#addBloodStockModal').modal('toggle');
+         
            },
            error: function(err)
            {

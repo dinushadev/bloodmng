@@ -534,9 +534,11 @@
    
      <script src="js/home.js"></script>  
     <script type="text/javascript">
+    var bloodStockTable=  null;
+     var hospitalListTable= null;
     $(document).ready(function() {
    
-      $('#bloodStockTable').dataTable( {
+    bloodStockTable=  $('#bloodStockTable').DataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
          "ajax": "/hospitalstock",
         "columns": [
@@ -548,8 +550,11 @@
             { "data": "del" }
         ]
       } );
+  /*  setInterval( function () {
+    bloodStockTable.ajax.reload();
+}, 3000 );*/
 
-         $('#hospitalListTable').dataTable( {
+        hospitalListTable= $('#hospitalListTable').DataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
          "ajax": "/hospital",
         "columns": [
