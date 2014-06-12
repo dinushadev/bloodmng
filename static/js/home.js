@@ -100,3 +100,23 @@ function addBloodStock(){
            }
          });
 }
+
+
+function loadStocks(){
+      var url = 'hospitalstock'
+     $.ajax({
+           type: "GET",
+           url: url,
+           success: function(data)
+           {
+               alert(data); // show response from the php script.
+               
+           },
+           error: function(err)
+           {
+               alert(err); // show response from the php script.
+            //   home_alert.warning(data,'succ');
+             home_alert(err,'err');
+           }
+     });
+}

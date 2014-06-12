@@ -104,15 +104,17 @@ app.get('/home',  function home(request, response) {
 
 app.post('/stock',  function home(request, response) {
 
+	var hid=1;
+
 	pg.connect(config.dburl, function(err, client) {
 		if(err){
 			console.log('Error in connect to db: '+err);
 		}
 
 
-		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark) VALUES($1,$2,$3,$4)';
+		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark,hid) VALUES($1,$2,$3,$4,$5)';
 		var dateStrPart=request.body.expdate.split('-');
-		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark],function(err,result){
+		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark,hid],function(err,result){
 			if(err){
 				console.log('Erro in query: '+err);
 				response.statusCode=400;
@@ -135,12 +137,13 @@ app.post('/stock',  function home(request, response) {
 });
 
 
-app.get('/stock',  function home(request, response) {
+app.get('/hospitalstock',  function home(request, response) {
 
 	console.log('request id:'+request.body.sid);
+	var hid =null;
 	var sql;
-	if(request.body.hid){
-		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks WHERE=$1';
+	if(hid){
+		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks WHERE hid=$1';
 	}else{
 		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks ';
 	}
@@ -163,8 +166,9 @@ app.get('/stock',  function home(request, response) {
 		
 
 			result.rows.forEach(function(entry) {
-			    var tempRow= {'name':entry.hname,'loc':entry.pov+','+entry.dis,
-			    'avail':'','exp':'',
+			    var tempRow= {'group':entry.btype,'quentity':entry.quntty,
+			    'exp':entry.exp,
+			    'remark':entry.remark,
 			     'dtls':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button>',
 			     'del':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button>'};
 			    

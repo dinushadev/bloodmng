@@ -104,33 +104,14 @@
           <thead>
             <tr>
               <th>Group</th>
-              <th>Posible Recipient</th>
+              <th>Remark</th>
               <th>Available Stock</th>
               <th>Least Exp Date</th>
               <th>More</th>
               <th>(-)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>O−</td>
-              <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
-              <td>1000 pints</td>
-              <td>12/11/2016</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-            </tr>
-            <tr>
-              <td>O+</td>
-              <td>O+,A+,B-,B+,AB+</td>
-              <td>100 pints</td>
-              <td>12/11/2015</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-            </tr>
-          </tbody>
+         
         </table>
       </div>
 
@@ -555,9 +536,17 @@
     <script type="text/javascript">
     $(document).ready(function() {
    
-      $('#docListTable').dataTable( {
+      $('#bloodStockTable').dataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
-        "sPaginationType": "bootstrap"
+         "ajax": "/hospitalstock",
+        "columns": [
+            { "data": "group" },
+            { "data": "remark" },
+             { "data": "quentity" },
+            { "data": "exp" },
+            { "data": "dtls" },
+            { "data": "del" }
+        ]
       } );
 
          $('#hospitalListTable').dataTable( {
