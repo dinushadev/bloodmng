@@ -102,6 +102,85 @@ app.get('/home',  function home(request, response) {
 	response.render('home.html');
 });
 
+app.post('/stock',  function home(request, response) {
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+
+		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark) VALUES($1,$2,$3,$4)';
+		var dateStrPart=request.body.expdate.split('-');
+		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark],function(err,result){
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('Sorry, Error occurred');
+				return;
+			}
+
+			if(result.rowCount>0){
+				
+				response.statusCode=201;
+				response.send('New stock succesfully added.');
+			}else{
+				
+				response.statusCode=200;
+				response.send('Sorry, No record was added.');
+			}
+		});
+
+	});	
+});
+
+
+app.get('/stock',  function home(request, response) {
+
+	console.log('request id:'+request.body.sid);
+	var sql;
+	if(request.body.hid){
+		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks WHERE=$1';
+	}else{
+		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks ';
+	}
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+		client.query(sql,function(err,result){
+			
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			var hotTabData=[];
+		
+
+			result.rows.forEach(function(entry) {
+			    var tempRow= {'name':entry.hname,'loc':entry.pov+','+entry.dis,
+			    'avail':'','exp':'',
+			     'dtls':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button>',
+			     'del':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button>'};
+			    
+			     hotTabData.push(tempRow);
+			
+			});
+			response.send({"data": hotTabData});
+		//	done();
+		});
+
+		
+	});
+	
+	
+});
+
 
 app.post('/hospital',  function home(request, response) {
 

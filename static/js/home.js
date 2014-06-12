@@ -15,7 +15,7 @@ function addHospital(){
                alert(err); // show response from the php script.
             //   home_alert.warning(data,'succ');
             $('#hospitalDetails').modal('toggle');
-             home_alert(err,'err');
+             home_alert(err.responseText,'err');
            }
          });
 }
@@ -49,7 +49,7 @@ function getHospitals(id){
            data: {'hid':id}, // serializes the form's elements.
            success: function(data)
            {
-               alert(data); // show response from the php script.
+               //alert(data); // show response from the php script.
                return data;
            },
            error: function(err)
@@ -77,4 +77,26 @@ function loadHospitals(){
              home_alert(err,'err');
            }
      });
+}
+
+function addBloodStock(){
+  
+    $.ajax({
+           type: "POST",
+           url: 'stock',
+           data: $("#addStockForm").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+              // alert(JSON.stringify(data)); // show response from the php script.
+              home_alert(data,'succ');
+            $('#addBloodStockModal').modal('toggle');
+           },
+           error: function(err)
+           {
+              // alert(JSON.stringify(err)); // show response from the php script.
+            //   home_alert.warning(data,'succ');
+            $('#addBloodStockModal').modal('toggle');
+             home_alert(err.responseText,'err');
+           }
+         });
 }

@@ -100,7 +100,7 @@
        <div class="tab-pane active" id="bloodStocktabDev">
         <br/>
 
-        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="docListTable">
+        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="bloodStockTable">
           <thead>
             <tr>
               <th>Group</th>
@@ -482,11 +482,11 @@
         <h4 class="modal-title" id="myModalLabel">Add Blood stock</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" id="addStockForm">
           <div class="form-group">
             <label for="bloodGroup" class="col-lg-3 control-label">Blood Group</label>
             <div class="col-lg-8">
-              <select class="form-control"  id="bloodGroup" >
+              <select class="form-control"  id="bloodType" name="bloodType" >
                 <option>O-</option>
                 <option>O+</option>
                 <option>A-</option>
@@ -501,7 +501,7 @@
           <div class="form-group">
             <label for="quantity" class="col-lg-3 control-label">Quantity</label>
             <div class="col-lg-8">
-              <input type="text" class="form-control" data-provide="typeahead" id="quantity">
+              <input type="text" class="form-control" data-provide="typeahead" id="bQuantity" name="bQuantity">
             </div>
           </div>
           <div class="form-group">
@@ -511,23 +511,23 @@
               <input class="span2" id="expdate" size="16" type="text" value="12-02-2012">
               <span class="add-on"><i class="icon-th"></i></span>
             </div> -->
-             <input type="text" class="form-control" data-date="12-02-2012" data-date-format="dd-mm-yyyy" id="expdate">
+             <input type="text" class="form-control" data-date="12-02-2012" data-date-format="dd-mm-yyyy" id="expdate" name="expdate">
              
 
              </div>
          </div>
          
          <div class="form-group">
-          <label for="birthDay" class="col-lg-3 control-label">Remark</label>
+          <label for="remark" class="col-lg-3 control-label">Remark</label>
           <div class="col-lg-8">
-            <textarea class="form-control"  id="textarea" rows="6" placeholder="Enter Remark"></textarea>
+            <textarea class="form-control" name="remark" id="remark" rows="6" placeholder="Enter Remark"></textarea>
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Add</button>
+      <button type="button" class="btn btn-primary" onClick="addBloodStock()">Add</button>
     </div>
   </div>
 </div>
