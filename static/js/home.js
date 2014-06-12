@@ -8,7 +8,7 @@ function addHospital(){
            {
               // alert(data); // show response from the php script.
               home_alert(data,'succ');
-              hospitalListTable=.ajax.reload();
+              hospitalListTable.ajax.reload();
             $('#hospitalDetails').modal('toggle');
            },
            error: function(err)

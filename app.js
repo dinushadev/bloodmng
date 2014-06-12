@@ -22,6 +22,8 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(__dirname + '/static/'));
 
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
 
 app.engine('html', ejs.renderFile);
 
@@ -112,9 +114,9 @@ app.post('/stock',  function home(request, response) {
 		}
 
 
-		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark,hid) VALUES($1,$2,$3,$4,$5)';
+		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark,hid,reserve) VALUES($1,$2,$3,$4,$5,$6)';
 		var dateStrPart=request.body.expdate.split('-');
-		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark,hid],function(err,result){
+		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark,hid,new Date()],function(err,result){
 			if(err){
 				console.log('Erro in query: '+err);
 				response.statusCode=400;
@@ -143,9 +145,9 @@ app.get('/hospitalstock',  function home(request, response) {
 	var hid =null;
 	var sql;
 	if(hid){
-		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks WHERE hid=$1';
+		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM stocks WHERE hid=$1';
 	}else{
-		sql = 'SELECT sid,btype,quntty,exp,remark FROM stocks ';
+		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM stocks ';
 	}
 
 	pg.connect(config.dburl, function(err, client) {
@@ -169,8 +171,11 @@ app.get('/hospitalstock',  function home(request, response) {
 			    var tempRow= {'group':entry.btype,'quentity':entry.quntty,
 			    'exp':entry.exp,
 			    'remark':entry.remark,
-			     'dtls':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button>',
-			     'del':'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button>'};
+			    'reserve':entry.reserve,
+			     'option':'<button type="button" data-tboggle="modal" data-target="#docAvailbleTime" class="btn btn-info btn-sm">More</button>'+
+			     '<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary btn-sm">Edit</button>'+
+			     '<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-danger btn-sm">Del</button>'+
+			 	'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-success btn-sm">(-)</button>'	}
 			    
 			     hotTabData.push(tempRow);
 			
