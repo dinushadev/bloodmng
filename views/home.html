@@ -94,14 +94,19 @@
       <div class="col-md-10">
 
        <ul class="nav nav-tabs" id="userHomeTabs">
+          <% if(user.hid){ %>
         <li  class="active"><a  href="#bloodStocktabDev" data-toggle="tab">My Avaliblility</a></li>
         <li><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
+        <% }else{ %>
+        <li class="active"><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
+         <% } %>
          <% if(user.utype == 'a'){ %>
         <li><a href="#hospitaltabdiv" data-toggle="tab">Hospitals</a></li>
           <% } %>
       </ul>
 
       <div class="tab-content">
+        <% if(user.hid){ %>
        <div class="tab-pane active" id="bloodStocktabDev">
         <br/>
 
@@ -120,8 +125,11 @@
         </table>
       </div>
 
+       <div class="tab-pane" id="searchtabdiv">
+      <% }else{ %>
       <!--Search tab Dev -->
-      <div class="tab-pane" id="searchtabdiv">
+      <div class="tab-pane active" id="searchtabdiv">
+       <% } %>
            <form class="form-vertical" role="form">
           <div class="form-group">
              <div class="col-lg-4">
