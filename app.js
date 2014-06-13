@@ -95,7 +95,7 @@ app.get('/home', restrict, function home(request, response) {
 
 app.post('/stock',  function home(request, response) {
 
-	var hid=1;
+	var hid=request.session.USER_INFO.hid;
 
 	pg.connect(config.dburl, function(err, client) {
 		if(err){
@@ -131,7 +131,7 @@ app.post('/stock',  function home(request, response) {
 app.get('/hospitalstock',  function home(request, response) {
 
 	console.log('request id:'+request.body.sid);
-	var hid =null;
+	var hid =request.session.USER_INFO.hid;
 	var sql;
 	if(hid){
 		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM stocks WHERE hid=$1';
@@ -144,7 +144,7 @@ app.get('/hospitalstock',  function home(request, response) {
 			console.log('Error in connect to db: '+err);
 		}
 
-		client.query(sql,function(err,result){
+		client.query(sql,[hid],function(err,result){
 			
 			if(err){
 				console.log('Erro in query: '+err);
