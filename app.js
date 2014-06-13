@@ -14,6 +14,9 @@ request = require('request');
 
 var app = module.exports = express();
 
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
 // all environments
 app.set('port', process.env.PORT || 5000);
 app.use(express.logger('dev'));
@@ -22,10 +25,14 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(__dirname + '/static/'));
 
-app.use(express.cookieParser());
-app.use(express.session({secret: '1234567890QWERTY'}));
 
 app.engine('html', ejs.renderFile);
+app.set('view engine', 'ejs');  
+
+
+
+
+
 
 /**
 * Render the login page.
@@ -46,7 +53,7 @@ app.post('/login',  function login(request, response) {
 			console.log('Error in connect to db: '+err);
 		}
 		//var query = client.query("SELECT * FROM users WHERE uname=dinu");
-		var query = client.query("SELECT uname,pass,email,utype FROM users WHERE uname = $1", [usrname],function(err, result) {
+		var query = client.query("SELECT uname,pass,email,utype,hid FROM users WHERE uname = $1", [usrname],function(err, result) {
 			if(err){
 				console.log('Erro in query: '+err);
 				response.redirect('/');
@@ -58,6 +65,7 @@ app.post('/login',  function login(request, response) {
 			if(result.rows[0]){
 				if(result.rows[0].pass == pass){
 					//TODO add session data
+					request.session.USER_INFO= result.rows[0];
 					response.redirect('/home');
 					//return;
 				}else{
@@ -71,37 +79,18 @@ app.post('/login',  function login(request, response) {
 			//done();
 		});
 
-/*		query.on('row', function(row) {
-			console.log('row:'+JSON.stringify(row));
-			if(row){
-				if(row.pass == pass){
-					//TODO add session data
-					response.redirect('/home');
-					//return;
-				}else{
-					//invalid pass
-					response.redirect('/');
-				}
-			}else{
-				//invalid usrname
-				response.redirect('/');
-			}
-		});
-		   query.on('error', function(error) {
-		   	console.log('errrooooooooooo'+error)
-          		})
-		query.on('oid', function(row) {
-			response.redirect('/');
-		});*/
+
 
 });
 
 
 });
 
-app.get('/home',  function home(request, response) {
-
-	response.render('home.html');
+app.get('/home', restrict, function home(request, response) {
+    response.render('home.html',{
+    	user: request.session.USER_INFO
+    });
+	
 });
 
 app.post('/stock',  function home(request, response) {
@@ -271,13 +260,15 @@ app.get('/hospital',  function home(request, response) {
 	
 	
 });
-/*exports.login = function login(request, response) {
 
-response.render('index.html', {
-error: request.flash('error'),
-csrfToken: request.session._csrf
-});
-};*/
+function restrict(req, res, next) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  if (req.session.USER_INFO) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    next();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  } else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    req.session.error = 'Access denied!';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    res.redirect('/');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+}   
 
 
 app.listen(app.get('port'), function() {

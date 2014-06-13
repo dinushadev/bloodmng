@@ -81,7 +81,10 @@
             <li> <a data-toggle="modal" href="#addBloodStockModal">New stock(+)</a></li>
             <li><a href="#">Get stock(-)</a></li>
             <li><a href="#">Seach stock</a></li>
+
+           <% if(user.utype == 'a'){ %>
             <li><a href="#hospitals" data-toggle="tab">Hospitals</a></li>
+           <% } %>
           </ul>
         </div><!--/.well -->
 
@@ -92,8 +95,10 @@
 
        <ul class="nav nav-tabs" id="userHomeTabs">
         <li  class="active"><a  href="#bloodStocktabDev" data-toggle="tab">My Avaliblility</a></li>
-        <li><a href="#searchtabdiv" data-toggle="tab">Search</a></li>
+        <li><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
+         <% if(user.utype == 'a'){ %>
         <li><a href="#hospitaltabdiv" data-toggle="tab">Hospitals</a></li>
+          <% } %>
       </ul>
 
       <div class="tab-content">
@@ -187,6 +192,8 @@
       </div>
 
       <!--Hospital tab Dev -->
+
+       <% if(user.utype == 'a'){ %>
       <div class="tab-pane" id="hospitaltabdiv">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospitalDetails">New Hospital</button>
         <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="hospitalListTable">
@@ -223,10 +230,7 @@
         </table>
 
       </div>
-        
-
-  </div>
-
+      <%}  %>
 </div>
 </div>
 
