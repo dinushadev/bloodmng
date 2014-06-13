@@ -163,36 +163,15 @@
           <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="searchResultTable">
           <thead>
             <tr>
+              <th>Group</th>
               <th>Hospital</th>
-              <th>Location</th>
-              <th>Posible Recipient</th>
               <th>Available Stock</th>
+              <th>Remark</th>
               <th>Least Exp Date</th>
               <th>Request</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Ragama Genaral Hos−</td>
-               <td>Ragam</td>
-              <td>O-,O+,A-,A+,B-,B+,AB-,AB+</td>
-              <td>1000 pints</td>
-              <td>12/11/2016</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Request</button></td>
-             
-            </tr>
-            <tr>
-              <td>Asiri Hospital</td>
-                 <td>Colombo 6</td>
-              <td>O+,A+,B-,B+,AB+</td>
-              <td>100 pints</td>
-              <td>12/11/2015</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Request</button></td>
-             
-            </tr>
-          </tbody>
+          
         </table>
 
         </div>
@@ -215,26 +194,7 @@
               <th>(-)</th>
             </tr>
           </thead>
-       <!--    <tbody>
-            <tr>
-              <td>Genaral Hospital</td>
-              <td>Colombo 11</td>
-              <td>A-,A-</td>
-              <td>12/11/2016</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-            </tr>
-            <tr>
-              <td>Hemas Hospital</td>
-               <td>Waththala</td>
-              <td>O+,A+,B-,B+,AB+</td>
-              <td>12/11/2015</td>
-
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">Details</button></td>
-              <td><button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary">(-)</button></td>
-            </tr>
-          </tbody> -->
+    
         </table>
 
       </div>
@@ -529,6 +489,7 @@
     <script type="text/javascript">
     var bloodStockTable=  null;
      var hospitalListTable= null;
+     var searchResultTable= null;
     $(document).ready(function() {
    
     bloodStockTable=  $('#bloodStockTable').DataTable( {
@@ -543,9 +504,8 @@
             { "data": "option" }
         ]
       } );
-  /*  setInterval( function () {
-    bloodStockTable.ajax.reload();
-}, 3000 );*/
+ 
+
 
         hospitalListTable= $('#hospitalListTable').DataTable( {
         "sDom": "<'row'<'col-xs-6'T><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
@@ -557,6 +517,20 @@
             { "data": "exp" },
             { "data": "dtls" },
             { "data": "del" }
+        ]
+        
+      } );
+
+        searchResultTable = $('#searchResultTable').DataTable( {
+          "sDom": "<'row'<'col-xs-6'T><'col-xs-6'>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+         "ajax": "/liststock",
+        "columns": [
+            { "data": "group" },
+            { "data": "hospital" },
+             { "data": "avail" },
+              { "data": "remark" },
+            { "data": "exp" },
+            { "data": "option" }
         ]
         
       } );

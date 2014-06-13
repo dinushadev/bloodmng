@@ -93,6 +93,52 @@ app.get('/home', restrict, function home(request, response) {
 	
 });
 
+
+app.get('/liststock',  function home(request, response) {
+   console.log('request id:'+request.body.sid);
+	var btype = request.body.btype;
+	var quentity = request.body.qun;
+	var sql = 'SELECT hospital.hname, instocks.ava_quntty, instocks.exp, instocks.btype, instocks.remark FROM  public.instocks,  public.hospital WHERE hospital.hid = instocks.hid';
+	
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+		client.query(sql,function(err,result){
+			
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			var stockList=[];
+		
+
+			result.rows.forEach(function(entry) {
+			    var tempRow= {'group':entry.btype,'avail':entry.ava_quntty,
+			    'exp':entry.exp,
+			    'remark':entry.remark,
+			    'hospital':entry.hname,
+			     'option':'<button type="button" data-tboggle="modal" data-target="#docAvailbleTime" class="btn btn-primary btn-sm">Request</button>'}
+			    
+			     stockList.push(tempRow);
+			
+			});
+			response.send({"data": stockList});
+		//	done();
+		});
+
+		
+	});
+	
+	
+});
+
+
 app.post('/stock',  function home(request, response) {
 
 	var hid=request.session.USER_INFO.hid;
@@ -103,9 +149,9 @@ app.post('/stock',  function home(request, response) {
 		}
 
 
-		var sql = 'INSERT INTO stocks (btype,quntty,exp,remark,hid,reserve) VALUES($1,$2,$3,$4,$5,$6)';
+		var sql = 'INSERT INTO instocks (btype,quntty,exp,remark,hid,reserve,ava_quntty) VALUES($1,$2,$3,$4,$5,$6,$7)';
 		var dateStrPart=request.body.expdate.split('-');
-		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark,hid,new Date()],function(err,result){
+		client.query(sql,[request.body.bloodType,request.body.bQuantity,new Date(dateStrPart[2],dateStrPart[1],dateStrPart[0]),request.body.remark,hid,new Date(),request.body.bQuantity],function(err,result){
 			if(err){
 				console.log('Erro in query: '+err);
 				response.statusCode=400;
@@ -134,9 +180,9 @@ app.get('/hospitalstock',  function home(request, response) {
 	var hid =request.session.USER_INFO.hid;
 	var sql;
 	if(hid){
-		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM stocks WHERE hid=$1';
+		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM instocks WHERE hid=$1';
 	}else{
-		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM stocks ';
+		sql = 'SELECT sid,btype,quntty,exp,remark,reserve FROM instocks ';
 	}
 
 	pg.connect(config.dburl, function(err, client) {
