@@ -98,7 +98,7 @@ app.get('/liststock',  function home(request, response) {
    console.log('request id:'+request.body.sid);
 	var btype = request.body.btype;
 	var quentity = request.body.qun;
-	var sql = 'SELECT hospital.hname, instocks.ava_quntty, instocks.exp, instocks.btype, instocks.remark FROM  public.instocks,  public.hospital WHERE hospital.hid = instocks.hid';
+	var sql = 'SELECT instocks.sid,hospital.hname, instocks.ava_quntty, instocks.exp, instocks.btype, instocks.remark FROM  public.instocks,  public.hospital WHERE hospital.hid = instocks.hid';
 	
 
 	pg.connect(config.dburl, function(err, client) {
@@ -123,7 +123,7 @@ app.get('/liststock',  function home(request, response) {
 			    'exp':entry.exp,
 			    'remark':entry.remark,
 			    'hospital':entry.hname,
-			     'option':'<button type="button" data-tboggle="modal" data-target="#docAvailbleTime" class="btn btn-primary btn-sm">Request</button>'}
+			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockRequest" class="btn btn-primary btn-sm blood-req">Request</button>'}
 			    
 			     stockList.push(tempRow);
 			
