@@ -123,3 +123,29 @@ function loadStocks(){
            }
      });
 }
+
+
+
+function addBloodRequest(){
+  
+    $.ajax({
+           type: "POST",
+           url: 'requeststock',
+           data: $("#stockRequestForm").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+              // alert(JSON.stringify(data)); // show response from the php script.
+              home_alert(data,'succ');
+               bloodStockTable.ajax.reload();
+            $('#stockRequest').modal('toggle');
+         
+           },
+           error: function(err)
+           {
+              // alert(JSON.stringify(err)); // show response from the php script.
+            //   home_alert.warning(data,'succ');
+            $('#stockRequest').modal('toggle');
+             home_alert(err.responseText,'err');
+           }
+         });
+}

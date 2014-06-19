@@ -318,6 +318,41 @@ app.get('/logout',  function home(request, response) {
 });
 
 
+
+app.post('/requeststock',  function home(request, response) {
+   
+	console.log('request:'+JSON.stringify(request.body));
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+
+		var sql = 'INSERT INTO requests (from_hid,to_hid,comment,btype,quntty,status) VALUES($1,$2,$3,$4,$5,$6)';
+		client.query(sql,[request.body.reqHospital,request.session.USER_INFO.hid,request.body.reqComment,request.body.bloodType,request.body.reqStock,false],function(err,result){
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			if(result.rowCount>0){
+				
+				response.statusCode=201;
+				response.send('New blood request succesfully added.');
+			}else{
+				
+				response.statusCode=200;
+				response.send('Sorry No record was added.');
+			}
+		});
+
+		
+	});
+
+});
+
 function restrict(req, res, next) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
   if (req.session.USER_INFO) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
     next();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
