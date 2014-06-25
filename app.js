@@ -140,7 +140,7 @@ app.get('/liststock',  function home(request, response) {
 
 app.get('/listrequests',  function home(request, response) {
 	
-	var sql = 'SELECT instocks.sid,hospital.hname, instocks.ava_quntty, instocks.exp, instocks.btype, instocks.remark FROM  public.instocks,  public.hospital WHERE hospital.hid = instocks.hid';
+	var sql = 'SELECT hospital.hname, requests.comment,requests.btype, requests.quntty FROM public.requests,public.hospital WHERE requests.from_hid = hospital.hid AND requests.to_hid=$1';
 	
 
 	pg.connect(config.dburl, function(err, client) {
@@ -148,7 +148,7 @@ app.get('/listrequests',  function home(request, response) {
 			console.log('Error in connect to db: '+err);
 		}
 
-		client.query(sql,function(err,result){
+		client.query(sql,[request.session.USER_INFO.hid],function(err,result){
 			
 			if(err){
 				console.log('Erro in query: '+err);
@@ -161,11 +161,11 @@ app.get('/listrequests',  function home(request, response) {
 		
 
 			result.rows.forEach(function(entry) {
-			    var tempRow= {'group':entry.btype,'avail':entry.ava_quntty,
+			    var tempRow= {'group':entry.btype,'quntty':entry.quntty,
 			    'exp':entry.exp,
-			    'remark':entry.remark,
+			    'comment':entry.comment,
 			    'hospital':entry.hname,
-			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockRequest" class="btn btn-primary btn-sm blood-req">Request</button>'}
+			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockRequest" class="btn btn-primary btn-sm blood-req">Response</button>'}
 			    
 			     stockList.push(tempRow);
 			
