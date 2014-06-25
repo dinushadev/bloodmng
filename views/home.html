@@ -97,6 +97,7 @@
           <% if(user.hid){ %>
         <li  class="active"><a  href="#bloodStocktabDev" data-toggle="tab">My Avaliblility</a></li>
         <li><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
+         <li><a href="#requestDev" data-toggle="tab">Requests</a>  </li>
         <% }else{ %>
         <li class="active"><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
          <% } %>
@@ -118,6 +119,25 @@
               <th>Available Stock</th>
               <th>Least Exp Date</th>
               <th>Remark</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+         
+        </table>
+      </div>
+
+        <div class="tab-pane" id="requestDev">
+        <br/>
+
+        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="requestTable">
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>Group</th>
+              <th>Quentity</th>
+              <th>Available Stock</th>
+              <th>Least Exp Date</th>
+              <th>Comment</th>
               <th>Options</th>
             </tr>
           </thead>
@@ -217,10 +237,12 @@
 
               <div >
                 <form class="form-horizontal" role="form" id="stockRequestForm" >
+                     <input type="text" class="hide" id="stockId" name="stockId"  />
+                    
                   <div class="form-group">
                     <label for="bloodType" class="col-lg-3 control-label">Blood Type</label>
                     <div class="col-lg-8">
-                         <input type="text" class="form-control" id="bloodType" name="bloodType"  disabled>
+                         <input type="text" class="form-control" id="bloodType" name="bloodType"  readonly>
                       </div>
                   </div>
                    <div class="form-group">
@@ -594,6 +616,21 @@
         
       } );
 
+          requestTable = $('#requestTable').DataTable( {
+          "sDom": "<'row'<'col-xs-6'T><'col-xs-6'>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+         "ajax": "/listrequests",
+        "columns": [
+            { "data": "from" },
+            { "data": "group" },
+             { "data": "qunty" },
+             { "data": "avail" },
+              { "data": "comment" },
+            { "data": "exp" },
+            { "data": "option" }
+        ]
+        
+      } );
+
 
 $(document).on("click", ".blood-req", function (e) {
    //  var id = e.currentTarget.id;
@@ -609,6 +646,8 @@ $(document).on("click", ".blood-req", function (e) {
      $("#stockRequestForm #bloodType").val( bGrpup );
      $("#stockRequestForm #reqHospital").val( hosp );
       $("#stockRequestForm #bloodAvailbity").val( avaQn );
+       $("#stockRequestForm #stockId").val( stockId );
+
    //  alert(hosp+'  '+bGrpup);
      //  $(".modal-body #bookId").val( bGrpup );
      //alert(stockId);

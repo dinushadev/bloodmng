@@ -138,6 +138,49 @@ app.get('/liststock',  function home(request, response) {
 	
 });
 
+app.get('/listrequests',  function home(request, response) {
+	
+	var sql = 'SELECT instocks.sid,hospital.hname, instocks.ava_quntty, instocks.exp, instocks.btype, instocks.remark FROM  public.instocks,  public.hospital WHERE hospital.hid = instocks.hid';
+	
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+		client.query(sql,function(err,result){
+			
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			var stockList=[];
+		
+
+			result.rows.forEach(function(entry) {
+			    var tempRow= {'group':entry.btype,'avail':entry.ava_quntty,
+			    'exp':entry.exp,
+			    'remark':entry.remark,
+			    'hospital':entry.hname,
+			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockRequest" class="btn btn-primary btn-sm blood-req">Request</button>'}
+			    
+			     stockList.push(tempRow);
+			
+			});
+			response.send({"data": stockList});
+		//	done();
+		});
+
+		
+	});
+	
+	
+});
+
+
 
 app.post('/stock',  function home(request, response) {
 
@@ -322,14 +365,18 @@ app.get('/logout',  function home(request, response) {
 app.post('/requeststock',  function home(request, response) {
    
 	console.log('request:'+JSON.stringify(request.body));
+
+
+
 	pg.connect(config.dburl, function(err, client) {
 		if(err){
 			console.log('Error in connect to db: '+err);
 		}
 
-
-		var sql = 'INSERT INTO requests (from_hid,to_hid,comment,btype,quntty,status) VALUES($1,$2,$3,$4,$5,$6)';
-		client.query(sql,[request.body.reqHospital,request.session.USER_INFO.hid,request.body.reqComment,request.body.bloodType,request.body.reqStock,false],function(err,result){
+		var sql = 'SELECT hid FROM instocks WHERE instocks.sid=$1';
+	
+		client.query(sql,[request.body.stockId],function(err,result){
+			
 			if(err){
 				console.log('Erro in query: '+err);
 				response.statusCode=400;
@@ -337,16 +384,38 @@ app.post('/requeststock',  function home(request, response) {
 				return;
 			}
 
-			if(result.rowCount>0){
+			var stockList=[];
+			if(result.rows[0]){
+				console.log('hospital Id : '+result.rows[0].hid);
+				var reqHid =result.rows[0].hid;
+
+				var sql = 'INSERT INTO requests (from_hid,to_hid,comment,btype,quntty,status) VALUES($1,$2,$3,$4,$5,$6)';
 				
-				response.statusCode=201;
-				response.send('New blood request succesfully added.');
-			}else{
-				
-				response.statusCode=200;
-				response.send('Sorry No record was added.');
+				client.query(sql,[reqHid,request.session.USER_INFO.hid,request.body.reqComment,request.body.bloodType,request.body.reqStock,false],function(err,result){
+					if(err){
+						console.log('Erro in query: '+err);
+						response.statusCode=400;
+						response.send('error occurred');
+						return;
+					}
+
+					if(result.rowCount>0){
+						
+						response.statusCode=201;
+						response.send('New blood request succesfully added.');
+					}else{
+						
+						response.statusCode=200;
+						response.send('Sorry No record was added.');
+					}
+				});
 			}
+		//	done();
 		});
+
+
+
+
 
 		
 	});
