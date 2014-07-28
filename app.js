@@ -251,9 +251,9 @@ app.get('/hospitalstock',  function home(request, response) {
 			    'remark':entry.remark,
 			    'reserve':entry.reserve,
 			     'option':'<button type="button" data-tboggle="modal" data-target="#docAvailbleTime" class="btn btn-info btn-sm">More</button>'+
-			     '<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary btn-sm">Edit</button>'+
-			     '<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-danger btn-sm">Del</button>'+
-			 	'<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-success btn-sm">(-)</button>'	}
+			     '&nbsp;<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-primary btn-sm">Edit</button>'+
+			     '&nbsp;<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-danger btn-sm">Del</button>'+
+			 	'&nbsp;<button type="button" data-toggle="modal" data-target="#docAvailbleTime" class="btn btn-success btn-sm">(-)</button>'	}
 			    
 			     hotTabData.push(tempRow);
 			

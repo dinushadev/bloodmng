@@ -51,10 +51,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img width="30px" height="30px" src="images/pro-pic" alt="Dinusha" ><b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a data-toggle="modal"  href="#profileSettingsModal">Settings</a></li>
-                <li><a href="#">Sign out</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Something else here</a></li>
+               
 
               </ul>
             </li>
@@ -132,10 +129,12 @@
       </div>
 
        <div class="tab-pane" id="searchtabdiv">
+       <br />
       <% }else{ %>
       <!--Search tab Dev -->
       <div class="tab-pane active" id="searchtabdiv">
        <% } %>
+       <br />
              <div class="col-lg-4">
                <input type="text" class="form-control" id="bGroupSerchTxt" placeholder="Blood Group">
       
@@ -349,113 +348,6 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-<!-- Profile setting Modal -->
-<div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Profile settings</h4>
-      </div>
-      <div class="modal-body">
-
-        <ul class="nav nav-tabs" id="profileSettingTabs">
-          <li><a href="#general"  data-toggle="tab">General</a></li>
-          <li><a href="#picture" data-toggle="tab">Picture</a></li>
-          <li><a href="#network" data-toggle="tab">Network</a></li>
-          <li><a href="#advance" data-toggle="tab">Advance</a></li>
-        </ul>
-
-      </div>
-
-
-      <div class="tab-content">
-        <!-- General Tab -->
-        <div class="tab-pane active" id="general"><h2>Dinusha Nandika</h2>
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="userName" class="col-lg-3 control-label">User Name</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="userName" placeholder="User Name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="firstName" class="col-lg-3 control-label">First Name</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="firstName" placeholder="First Name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="lastName" class="col-lg-3 control-label">Last Name</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="userEmail" class="col-lg-3 control-label">Email</label>
-              <div class="col-lg-8">
-                <input type="email" class="form-control" id="userEmail" placeholder="Email">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="birthDay" class="col-lg-3 control-label">Birth Day</label>
-              <div class="col-lg-8">
-                <input type="date" class="form-control" id="birthDay" placeholder="Birth Day">
-              </div>
-            </div>
-
-
-
-            <div class="form-group">
-              <label for="inputLogType" class="col-lg-3 control-label">Gender</label>
-              <div class="col-lg-8">
-                <div class="btn-group" >
-                  <label class="radio">
-                   <input type="radio" name="genderRb" id="genderM" value="M" >
-                   Male
-                 </label>
-                 <label class="radio">
-                   <input type="radio" name="genderRb" id="genderF" value="F" >
-                   Female
-                 </label>
-               </div>          
-             </div>            
-           </div>
-
-         </form>
-
-       </div>
-       <div class="tab-pane" id="picture">
-
-
-        <form class="form-horizontal" role="form">
-
-         <div class="form-group">
-          <img src="images/pro-pic" alt="..." class="img-rounded">
-
-          <label class="col-lg-2 control-label"  for="exampleInputFile">Upload Image</label>
-          <div class="col-lg-8">
-            <input type="file" class="form-control"  id="exampleInputFile">
-
-            <p class="help-block">Example block-level help text here.</p>
-          </div>
-        </div>
-
-      </form>
-    </div>
-    <div class="tab-pane" id="network">Network</div>
-    <div class="tab-pane" id="advance">Advance</div>
-  </div>
- 
-
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save</button>
-  </div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 <!-- Add new blood stock modal -->
