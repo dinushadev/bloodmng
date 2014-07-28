@@ -136,30 +136,14 @@
       <!--Search tab Dev -->
       <div class="tab-pane active" id="searchtabdiv">
        <% } %>
-           <form class="form-vertical" role="form">
-          <div class="form-group">
              <div class="col-lg-4">
-              <select class="form-control"  id="bloodGroup" >
-                <option>[select a blood group]</option>
-                <option>O-</option>
-                <option>O+</option>
-                <option>A-</option>
-                <option>A+</option>
-                <option>B-</option>
-                <option>B+</option>
-                <option>AB-</option>
-                <option>AB+</option>
-              </select>
+               <input type="text" class="form-control" id="bGroupSerchTxt" placeholder="Blood Group">
+      
             </div>
             <div class="col-lg-4">
                <input type="text" class="form-control" id="neededQuantity" placeholder="Needed Quantity">
       
             </div>
-             
-          <button type="button" class="col-lg-4 btn btn-primary" data-tboggle="modal" data-target="#stockRequest" >Search</button>
-           
-          </div>
-        </form>
         <br />
         <br />
         <br />
@@ -601,6 +585,21 @@
         ]
         
       } );
+
+          $( '#bGroupSerchTxt' ).on( 'keyup change', function () {
+            searchResultTable
+                .column( 0 )
+                .search( this.value )
+                .draw();
+        } );
+        $( '#neededQuantitySerchTxt' ).on( 'keyup change', function () {
+            searchResultTable
+                .column( 2 )
+                .search( this.value )
+                .draw();
+        } );
+
+
 
           requestTable = $('#requestTable').DataTable( {
           "sDom": "<'row'<'col-xs-6'T><'col-xs-6'>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
