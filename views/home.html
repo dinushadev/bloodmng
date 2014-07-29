@@ -80,6 +80,7 @@
         <li  class="active"><a  href="#bloodStocktabDev" data-toggle="tab">My Avaliblility</a></li>
         <li><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
          <li><a href="#requestDev" data-toggle="tab">Requests</a>  </li>
+               <li><a href="#myRequestDev" data-toggle="tab">My Requests</a>  </li>
         <% }else{ %>
         <li class="active"><a href="#searchtabdiv" data-toggle="tab">Search</a>  </li>
          <% } %>
@@ -128,6 +129,24 @@
         </table>
       </div>
 
+         <div class="tab-pane" id="myRequestDev">
+        <br/>
+
+        <table class="table table-hover table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" id="myRequestTable">
+          <thead>
+            <tr>
+              <th>To</th>
+              <th>Group</th>
+              <th>Quentity</th>
+        <!--       <th>Available Stock</th> -->
+              <th>Comment</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+         
+        </table>
+      </div>
+
        <div class="tab-pane" id="searchtabdiv">
        <br />
       <% }else{ %>
@@ -140,7 +159,7 @@
       
             </div>
             <div class="col-lg-4">
-               <input type="text" class="form-control" id="neededQuantity" placeholder="Needed Quantity">
+               <input type="text" class="form-control" id="neededQuantitySerchTxt" placeholder="Needed Quantity">
       
             </div>
         <br />
@@ -433,6 +452,9 @@
     var bloodStockTable=  null;
      var hospitalListTable= null;
      var searchResultTable= null;
+      var requestTable= null;
+       var myRequestTable= null;
+
     $(document).ready(function() {
    
     bloodStockTable=  $('#bloodStockTable').DataTable( {
@@ -478,6 +500,23 @@
         
       } );
 
+ 
+   /*     $( '#neededQuantitySerchTxt' ).on( 'keyup change', function () {
+           var quenty = parseInt( $('#neededQuantitySerchTxt').val(), 10 );
+
+           var resultData= null;
+            searchResultTable
+                .column( 2 )
+                //.search( this.value )
+                .data()
+                .filter( function ( value, index ) {
+                    console.log (value+' '+index+' '+quenty);
+                      return value >= quenty ? true : false;
+                  })
+                .draw();
+        } );*/
+
+
           $( '#bGroupSerchTxt' ).on( 'keyup change', function () {
             searchResultTable
                 .column( 0 )
@@ -508,6 +547,23 @@
         
       } );
 
+           myRequestTable = $('#myRequestTable').DataTable( {
+          "sDom": "<'row'<'col-xs-6'T><'col-xs-6'>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>",
+         "ajax": "/listmyrequests",
+        "columns": [
+            { "data": "hospital" },
+            { "data": "group" },
+             { "data": "quntty" },
+      /*       { "data": "avail" },*/
+              { "data": "comment" },
+         /*   { "data": "exp" },*/
+            { "data": "option" }
+        ]
+        
+      } );
+
+
+
 
 $(document).on("click", ".blood-req", function (e) {
    //  var id = e.currentTarget.id;
@@ -525,6 +581,7 @@ $(document).on("click", ".blood-req", function (e) {
       $("#stockRequestForm #bloodAvailbity").val( avaQn );
        $("#stockRequestForm #stockId").val( stockId );
 
+
    //  alert(hosp+'  '+bGrpup);
      //  $(".modal-body #bookId").val( bGrpup );
      //alert(stockId);
@@ -541,6 +598,12 @@ $(document).on("click", ".blood-req", function (e) {
    
 
     $('#profileSettingTabs a[href="#general"]').tab('show');
+
+    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+
+    //  alert($($(e.target).attr('href')).children("table"));
+
+})
 
     //loadHospitals();
 

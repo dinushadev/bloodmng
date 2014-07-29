@@ -165,7 +165,7 @@ app.get('/listrequests',  function home(request, response) {
 			    'exp':entry.exp,
 			    'comment':entry.comment,
 			    'hospital':entry.hname,
-			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockRequest" class="btn btn-primary btn-sm blood-req">Response</button>'}
+			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockResponse" class="btn btn-primary btn-sm blood-req">Response</button>'}
 			    
 			     stockList.push(tempRow);
 			
@@ -180,6 +180,47 @@ app.get('/listrequests',  function home(request, response) {
 	
 });
 
+app.get('/listmyrequests',  function home(request, response) {
+	
+	var sql = 'SELECT hospital.hname, requests.comment,requests.btype, requests.quntty FROM public.requests,public.hospital WHERE requests.to_hid = hospital.hid AND requests.from_hid=$1';
+	
+
+	pg.connect(config.dburl, function(err, client) {
+		if(err){
+			console.log('Error in connect to db: '+err);
+		}
+
+		client.query(sql,[request.session.USER_INFO.hid],function(err,result){
+			
+			if(err){
+				console.log('Erro in query: '+err);
+				response.statusCode=400;
+				response.send('error occurred');
+				return;
+			}
+
+			var stockList=[];
+		
+
+			result.rows.forEach(function(entry) {
+			    var tempRow= {'group':entry.btype,'quntty':entry.quntty,
+			    'exp':entry.exp,
+			    'comment':entry.comment,
+			    'hospital':entry.hname,
+			     'option':'<button type="button" data-id="'+entry.sid+'" data-toggle="modal" data-target="#stockResponse" class="btn btn-primary btn-sm blood-req">Response</button>'}
+			    
+			     stockList.push(tempRow);
+			
+			});
+			response.send({"data": stockList});
+		//	done();
+		});
+
+		
+	});
+	
+	
+});
 
 
 app.post('/stock',  function home(request, response) {
@@ -391,7 +432,7 @@ app.post('/requeststock',  function home(request, response) {
 
 				var sql = 'INSERT INTO requests (from_hid,to_hid,comment,btype,quntty,status) VALUES($1,$2,$3,$4,$5,$6)';
 				
-				client.query(sql,[reqHid,request.session.USER_INFO.hid,request.body.reqComment,request.body.bloodType,request.body.reqStock,false],function(err,result){
+				client.query(sql,[request.session.USER_INFO.hid,reqHid,request.body.reqComment,request.body.bloodType,request.body.reqStock,false],function(err,result){
 					if(err){
 						console.log('Erro in query: '+err);
 						response.statusCode=400;
